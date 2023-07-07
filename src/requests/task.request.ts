@@ -17,3 +17,9 @@ export const saveNewTaskToAPI = (task: iTask) => {
         .then(response => response.data)
         .catch(err => Promise.reject(err.response.data))
 }
+
+export const getAllTasksFromAPI = () => {
+    return HTTP_API().get("/task/get-all-tasks")
+        .then(response => response.data)
+        .catch(err => Promise.reject(err.response.data))
+}
