@@ -34,7 +34,7 @@ export const Tasks: FC<iProps> = (props): JSX.Element => {
                                                         </IonCol>
                                                         <IonCol size="12" sizeMd="5" sizeLg="6">
                                                             <div className="task-title">Description:</div>
-                                                            <div className="task-title-content">{ task.taskDescription }</div>
+                                                            <div className="task-title-content" dangerouslySetInnerHTML={{ __html:task.taskDescription }}></div>
                                                         </IonCol>
                                                         <IonCol size="12" sizeMd="2" sizeLg="2">
                                                             <div className="task-title">Reward:</div>
