@@ -60,9 +60,6 @@ export const DashboardLayout: FC<iProps> = (props): JSX.Element => {
                             <IonItem lines="full" routerLink="/dashboard/tasks">
                                 <IonLabel slot='end' color={'primary'} className='dashboard-navigation-link'>Tasks</IonLabel>
                             </IonItem>
-                            <IonItem lines="full" routerLink="/dashboard">
-                                <IonLabel slot='end' color={'primary'} className='dashboard-navigation-link'>Dashboard</IonLabel>
-                            </IonItem>
                             <IonItem lines='full' onClick={processLogout}>
                                 <IonLabel slot='end' color={'primary'} className='dashboard-navigation-link'>
                                     Log out
