@@ -1,10 +1,11 @@
 import { FC } from "react";
-import { Route } from "react-router";
+import { Route, } from "react-router";
 
 import Dashboard from "../../../pages/private/dashboard/Dashboard";
 
 import Tasks from "../../../pages/private/dashboard/tasks/Tasks";
 import AddNewTask from "../../../pages/private/dashboard/tasks/AddNewTask";
+import Task from "../../../pages/private/dashboard/tasks/Task";
 
 export interface iProps {}
 export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
@@ -18,6 +19,9 @@ export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
             </Route>
             <Route exact path="/dashboard/tasks/new">
                 <AddNewTask />
+            </Route>
+            <Route path="/dashboard/tasks/task/:id">
+                <Task />
             </Route>
         </>
     )

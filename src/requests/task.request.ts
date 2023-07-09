@@ -3,14 +3,20 @@ import { HTTP_API } from "../helpers/http";
 
 export interface iTask {
     taskTitle: string,
-    taskReward: {
-        currency: string,
-        amount: number
-    },
+    taskReward: TaskReward,
     taskDescription: string,
     customFields: tCustomField[],
     taskActiveStatus: boolean
 }
+
+interface TaskReward {
+    currency: string;
+    amount: Amount;
+  }
+  
+  interface Amount {
+    '$numberDecimal': string;
+  }
 
 export const saveNewTaskToAPI = (task: iTask) => {
     return HTTP_API().post("/task/new", task)
@@ -20,6 +26,12 @@ export const saveNewTaskToAPI = (task: iTask) => {
 
 export const getAllTasksFromAPI = () => {
     return HTTP_API().get("/task/get-all-tasks")
+        .then(response => response.data)
+        .catch(err => Promise.reject(err.response.data))
+}
+
+export const getTaskByIDFromAPI = (id: string) => {
+    return HTTP_API().get("/task/get-task-by-id", { params: {id} })
         .then(response => response.data)
         .catch(err => Promise.reject(err.response.data))
 }
