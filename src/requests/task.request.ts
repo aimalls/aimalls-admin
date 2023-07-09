@@ -9,14 +9,14 @@ export interface iTask {
     taskActiveStatus: boolean
 }
 
-interface TaskReward {
+export interface TaskReward {
     currency: string;
-    amount: Amount;
+    amount: number;
   }
   
-  interface Amount {
-    '$numberDecimal': string;
-  }
+//   export interface Amount {
+//     '$numberDecimal': number;
+//   }
 
 export const saveNewTaskToAPI = (task: iTask) => {
     return HTTP_API().post("/task/new", task)

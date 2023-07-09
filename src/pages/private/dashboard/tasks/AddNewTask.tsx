@@ -1,7 +1,7 @@
 import { IonButton, IonCol, IonContent, IonGrid, IonInput, IonRow, IonSelect, IonSelectOption, IonTextarea, IonToggle } from "@ionic/react";
 import { FC, useState } from "react";
 import AddCustomField, { tCustomField } from "../../../../components/custom-field/AddCustomField";
-import { iTask, saveNewTaskToAPI } from "../../../../requests/task.request";
+import { TaskReward, iTask, saveNewTaskToAPI } from "../../../../requests/task.request";
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import { useHistory } from "react-router";
@@ -14,7 +14,7 @@ export const AddNewTask: FC<iProps> = (props): JSX.Element => {
     const [customFields, setCustomFields] = useState<tCustomField[]>([])
 
     const [taskTitle, setTaskTitle] = useState("")
-    const [taskReward, setTaskReward] = useState<{ currency: string, amount: number }>()
+    const [taskReward, setTaskReward] = useState<TaskReward>()
     const [taskDescription, setTaskDescription] = useState("")
     const [taskActiveStatus, setTaskActiveStatus]  = useState<boolean>(true)
 
@@ -25,13 +25,13 @@ export const AddNewTask: FC<iProps> = (props): JSX.Element => {
     }
 
     const handleChangeTaskRewardCurrency = (currency: string) => {
-        let current = {...taskReward} as { currency: string, amount: number };
+        let current = {...taskReward} as TaskReward;
         current.currency = currency
         setTaskReward(current)
     }
 
     const handleChangeTaskRewardAmount = (amount: number) => {
-        let current = {...taskReward} as { currency: string, amount: number };
+        let current = {...taskReward} as TaskReward;
         current.amount = amount
         setTaskReward(current)
     }
