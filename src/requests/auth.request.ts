@@ -26,7 +26,8 @@ export const GoogleLogin = async (code: string) => {
 
 export const getUserInfo = async () => {
     try {
-        return await HTTP_API().get("/auth/me")
+        const response = await HTTP_API().get("/auth/me")
+        return response.data
     } catch (error) {
         return Promise.reject(error)
     }

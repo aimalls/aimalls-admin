@@ -1,6 +1,5 @@
 import React, { createContext, ReactNode } from "react"
-import { useQuery } from "@tanstack/react-query"
-import { getUserInfo } from "../requests/auth.request"
+import useUser from "../hooks/useUser"
 
 export type tUser = {
     email: string,
@@ -28,14 +27,10 @@ type UserContextProviderProps = {
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     
-    const userQuery = useQuery({
-        queryKey: ["user"],
-        enabled: !!localStorage.getItem("authToken"),
-        queryFn: getUserInfo
-    })
+    const { user } = useUser()
 
     return (
-        <UserContext.Provider value={{user: userQuery.data?.data}}>
+        <UserContext.Provider value={{user}}>
             { children }
         </UserContext.Provider>
     )
