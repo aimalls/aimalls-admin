@@ -9,14 +9,27 @@ export interface iTask {
     taskActiveStatus: boolean
 }
 
+export interface iTaskV2 {
+    taskTitle: string,
+    taskReward: TaskRewardV2,
+    taskDescription: string,
+    customFields: tCustomField[],
+    taskActiveStatus: boolean
+}
+
+export interface TaskRewardV2 {
+    currency: string;
+    amount: Amount;
+}
+
 export interface TaskReward {
     currency: string;
     amount: number;
   }
   
-//   export interface Amount {
-//     '$numberDecimal': number;
-//   }
+  export interface Amount {
+    '$numberDecimal': number;
+  }
 
 export const saveNewTaskToAPI = (task: iTask) => {
     return HTTP_API().post("/task/new", task)

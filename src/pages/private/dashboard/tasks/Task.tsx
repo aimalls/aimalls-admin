@@ -2,7 +2,7 @@ import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonHeader, IonLabel, IonS
 import { FC, useState } from "react";
 import { useParams } from "react-router";
 import ParticipantsList from "./components/ParticipantsList";
-import { getTaskByIDFromAPI, iTask } from "../../../../requests/task.request";
+import { getTaskByIDFromAPI, iTask, iTaskV2 } from "../../../../requests/task.request";
 import { useQuery } from "@tanstack/react-query";
 import { getAllCheckedParticipantsTaskFromAPI, getTaskParticipantsFromAPI } from "../../../../requests/user-task.request";
 import CheckParticipantsTask from "./components/CheckParticipantsTask";
@@ -15,7 +15,7 @@ export const Task: FC<iProps> = (props): JSX.Element => {
 
     const taskQuery = useQuery(["task"], () => getTaskByIDFromAPI(params.id))
     
-    const task: iTask = taskQuery.data;
+    const task: iTaskV2 = taskQuery.data;
     const isTaskLoading = taskQuery.isLoading;
 
     return (
