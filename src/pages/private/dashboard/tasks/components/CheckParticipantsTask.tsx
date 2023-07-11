@@ -88,11 +88,13 @@ export const CheckParticipantsTask: FC<iProps> = ({taskId}): JSX.Element => {
                                                 participant.taskId.customFields.map((field: CustomField, index: number) => (
                                                     <div key={`custom-field-${index}`} style={{ display: 'flex', alignItems: 'center' }}>
                                                         <div>{ field.label }:</div>
+                                                        { participant.userInputs ? (
                                                         <div>
                                                             { field?.fieldType == 'file' ? 
                                                                 <a href={participant.userInputs[field.formControlName]} target="_blank">Click Here</a>
-                                                            : participant.userInputs[field.formControlName] ? participant.userInputs[field.formControlName] : null }
+                                                            : participant.userInputs[field.formControlName] }
                                                         </div>
+                                                        ): null }
                                                     </div>
                                                 )) 
                                             }
