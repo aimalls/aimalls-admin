@@ -71,7 +71,7 @@ export const CheckParticipantsTask: FC<iProps> = ({taskId}): JSX.Element => {
             <div>
                 { taskParticipants.length !== 0 ? 
                 <>
-                    { taskParticipants.map((participant) => (
+                    { taskParticipants ? taskParticipants.map((participant) => (
                     <IonCard key={participant._id}>
                         <IonCardContent>
                             <IonGrid>
@@ -106,7 +106,7 @@ export const CheckParticipantsTask: FC<iProps> = ({taskId}): JSX.Element => {
                             </IonGrid>
                         </IonCardContent>
                     </IonCard>
-                    )) }
+                    )): null }
                         
                 </>
                 : (
