@@ -91,7 +91,7 @@ export const ParticipantsList: FC<iProps> = ({taskId}): JSX.Element => {
                                                         <div>
                                                             { field?.fieldType == 'file' ? 
                                                                 <a href={participant.userInputs[field.formControlName]} target="_blank">Click Here</a>
-                                                            : participant.userInputs[field.formControlName] }
+                                                            : participant.userInputs[field.formControlName] ? participant.userInputs[field.formControlName] : null }
                                                         </div>
                                                     </div>
                                                 )) 
