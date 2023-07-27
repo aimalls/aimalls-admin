@@ -1,0 +1,99 @@
+#dashboard-layout{
+    ion-split-pane {
+        --side-max-width: 250px;
+        --border: none;
+        .dashboard-navigation-content{
+            .logo-wrap{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+            .dashboard-navigation-link{
+                font-family: 'WorkSans-Regular', Courier, monospace;
+            }
+        }
+        .referral-link-wrapper {
+            padding: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            input {
+                width: 100%;
+                border: 1px solid #f1f1f1;
+            }
+        }
+    }
+    .responsive-grid {
+        margin-right: 320px;
+    }
+    ion-menu::part(container) {
+        --background: var(--ion-color-primary);
+    }
+    .menu-content-push {
+        box-shadow: none;
+    }
+    ion-list#dashboard-list-menu {
+        padding-left: 20px;
+        ion-item::part(native) {
+            border: none;
+            background: none;
+            color: #FFF;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+        ion-item.active::part(native) {
+            background: #FFF;
+            color: var(--ion-color-primary);
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            position: relative;
+            
+        }
+        ion-item:not(.active) {
+            z-index: 1000;
+        }
+        ion-item.active {
+            overflow: visible;
+            div:nth-child(1) {
+                position: absolute;
+                top: -20px;
+                height: 20px;
+                width: 100%;
+                background: #FFF;
+                &::before {
+                    position: absolute;
+                    content: '';
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: var(--ion-color-primary);
+                    border-bottom-right-radius: 20px;
+                }
+            }
+            div:nth-child(2) {
+                position: absolute;
+                bottom: -20px;
+                height: 20px;
+                width: 100%;
+                background: #FFF;
+                &::before {
+                    position: absolute;
+                    content: '';
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: var(--ion-color-primary);
+                    border-top-right-radius: 20px;
+                }
+            }
+        }
+        ion-item::part(detail-icon) {
+            color: #FFF;
+        }
+    }
+}
