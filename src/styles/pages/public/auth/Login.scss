@@ -6,8 +6,13 @@
             justify-content: center;
             align-items: center;
             color: #fff;
-            background: url(../../../../assets/images/auth-bg2.jpg) center center no-repeat;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
             padding: 10px;
+            .logo-mobile{
+                display: none;
+            }
             .login-title{
                 text-align: center;
                 font-size: 40px;
@@ -55,18 +60,15 @@
             }
             
         }
-        ion-input.inputs{
+        ion-item.inputs{
             --background: rgba(255, 252, 252, 0.349);
+            --background-hover: rgba(255, 252, 252, 0.349);
+            --background-focused: rgba(255, 252, 252, 0.349);
             --color: #fff;
             --placeholder-color: #c0bfbf;
             --placeholder-opacity: 0.8;
-
-            --padding-bottom: 10px;
-            --padding-end: 10px;
-            --padding-start: 10px;
             --border-radius: 5px;
         }
-        
         
     }
     .welcome-admin-column{
@@ -92,16 +94,21 @@
        
     }
 }
-@media only screen and (max-width: 575px) {
+@media only screen and (max-width: 767px) {
     #login{
         .login-content{
             .login-column{
-                min-height: 80vh;
+                min-height: 100vh;
+                padding-bottom: 50px;
+                .logo-mobile{
+                    display: block;
+                }
             }
         }
         .welcome-admin-column{
-            min-height: 50vh;
-            padding-bottom: 10px;
+            // min-height: 50vh;
+            // padding-bottom: 10px;
+            display: none;
         }
     }
 }

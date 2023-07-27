@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import "../../../styles/pages/public/auth/Login.scss"
-import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonInput, IonButton, IonRouterLink } from '@ionic/react'
+import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonInput, IonButton, IonRouterLink, IonItem, IonIcon } from '@ionic/react'
 import Logo from '../../../assets/images/logo-full.png'
 
 import gmailIcon from '../../../assets/images/google.png'
+import loginBg from '../../../assets/images/auth-bg2.jpg'
+import loginBgPlaceholder from '../../../assets/images/auth-bg2-placeholder.jpg'
 
 import { GoogleLogin, Login as LoginRequest } from '../../../requests/auth.request'
 import getGoogleAuthURL from '../../../helpers/googleAuth'
 import { useLocalStorage } from 'usehooks-ts'
 import { AxiosResponse } from 'axios'
 import { useHistory } from 'react-router'
+import { useProgressiveImage } from '../../../hooks/ProgressiveImage'
+import { lockClosed, mail } from 'ionicons/icons'
 
 const Login: React.FC = () => {
 
@@ -17,6 +21,8 @@ const Login: React.FC = () => {
     const [password, setPassword] = useState('')
     const [authToken, setAuthToken] = useLocalStorage<string | AxiosResponse>('authToken', '')
 
+    const loaded_bg = useProgressiveImage(loginBg);
+    
     const history = useHistory();
 
     const processLogin = async (code?: string) => {
@@ -60,12 +66,16 @@ const Login: React.FC = () => {
                     <div className="login-content">
                         <IonGrid className='ion-no-padding'>
                             <IonRow className='ion-justify-content-between'>
-                                <IonCol size='12' sizeSm='6' sizeMd='8'>
-                                    <div className="login-column">
+                                <IonCol size='12' sizeSm='12' sizeMd='8'>
+                                    <div className="login-column" style={{ backgroundImage: `url(${ loaded_bg || loginBgPlaceholder })` }}>
                                         <IonRow className='ion-justify-content-center'>
                                             <IonCol size='12'>
-                                                <div className="login-title">Login to Your Account</div>
-                                                <div className='login-description'>Welcome back</div>
+                                                <div className='logo-mobile'>
+                                                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: "30px" }}>
+                                                        <img src={ Logo } alt='aimalls' />
+                                                    </div>
+                                                </div>
+                                                <div className="login-title" style={{ marginBottom: '30px' }}>Login to Your Account</div>
                                             </IonCol>
                                             <IonCol size='12' sizeSm='9' sizeMd='7'>
                                                 <IonButton expand='block' color={'light'} size='large' href={getGoogleAuthURL(import.meta.env.VITE_GOOGLE_AUTH_REDIRECT_URL)}>
@@ -75,29 +85,43 @@ const Login: React.FC = () => {
                                                 <div className='line-break'>or</div>
                                             </IonCol>
                                             <IonCol size='12' sizeSm='9' sizeMd='7' className='ion-padding-top'>
-                                                <IonInput 
-                                                    label='Email' 
-                                                    className='inputs ion-margin-bottom'
-                                                    type='email'
-                                                    required
-                                                    labelPlacement="floating" 
-                                                    placeholder='Enter your Email' 
-                                                    value={email}
-                                                    onIonChange={(val) => setEmail(val.detail.value!)}
-                                                />
-                                                <IonInput
-                                                    type='password' 
-                                                    label='Password' 
-                                                    className='inputs ion-margin-bottom' 
-                                                    labelPlacement="floating"
-                                                    placeholder='Enter your Password'
-                                                    value={password}
-                                                    required
-                                                    onIonChange={(val) => setPassword(val.detail.value!)}
-                                                />
-
-                                                <IonButton expand='block' shape='round' style={{marginTop: "50px"}} size='large' onClick={() => processLogin()}>Login</IonButton>
                                                 
+                                                <IonItem className="inputs  ion-margin-bottom">
+                                                    <IonIcon icon={mail} color='light' slot='end' size='large'></IonIcon>
+                                                    <IonInput 
+                                                        label='Email' 
+                                                        type='email'
+                                                        required
+                                                        aria-label='Email'
+                                                        labelPlacement="floating" 
+                                                        placeholder='Enter your Email' 
+                                                        value={email}
+                                                        onIonChange={(val) => setEmail(val.detail.value!)}
+                                                    />
+                                                </IonItem>
+                                                
+                                                <IonItem  className="inputs">
+                                                    <IonIcon icon={lockClosed} color='light' slot='end' size='large'></IonIcon>
+                                                    <IonInput
+                                                        type='password' 
+                                                        label='Password' 
+                                                        aria-label='Password'
+                                                        labelPlacement="floating"
+                                                        placeholder='Enter your Password'
+                                                        value={password}
+                                                        required
+                                                        onIonChange={(val) => setPassword(val.detail.value!)}
+                                                    />
+                                                </IonItem>
+                                                <IonButton 
+                                                    expand='block' 
+                                                    shape='round' 
+                                                    style={{marginTop: "50px", textTransform: "capitalize", fontFamily: "WorkSans-Regular"}} 
+                                                    size='large' 
+                                                    onClick={() => processLogin()}
+                                                >
+                                                    Login
+                                                </IonButton>
                                             </IonCol>
                                         </IonRow>
                                     </div>
