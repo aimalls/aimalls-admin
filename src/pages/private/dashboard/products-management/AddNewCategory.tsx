@@ -9,9 +9,12 @@ export const AddNewCategory: FC<iProps> = (props): JSX.Element => {
 
     const [present, dismiss] = useIonLoading();
 
-    const [parentCategories, setParentCategories] = useState<iProductCategory[]>([])
-
+    const [selectedParentCategory, setSelectedParentCategory] = useState<iProductCategory>()
     
+
+    const handleOnNew = () => {
+        console.log('new')
+    }
 
 
     const handleAddNewCategory = (value: string) => {
@@ -28,7 +31,7 @@ export const AddNewCategory: FC<iProps> = (props): JSX.Element => {
                         </IonCol>
                         <IonCol size="12">
                             <IonButton id="parent-category-select-btn" expand="block">Select Category</IonButton>
-                            <ParentCategorySelect />
+                            <ParentCategorySelect onSelect={(value: iProductCategory) => setSelectedParentCategory(value)} onNew={handleOnNew} />
                             {/* <IonSelect
                                 interfaceOptions={{ header: 'Select Category' }} 
                                 cancelText="New"

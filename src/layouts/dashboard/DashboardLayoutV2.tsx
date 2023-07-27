@@ -49,6 +49,16 @@ export const DashboardLayoutV2: FC<iProps> = (props: any): JSX.Element => {
                             <IonIcon slot='start' icon={homeOutline} color={'#fff'}></IonIcon>
                             <IonLabel className='dashboard-navigation-link'>Dashboard</IonLabel>
                         </IonItem>
+                        <IonItem lines="full" 
+                            routerLink="/dashboard/products-management"
+                            detail={false} 
+                            className={ navigation.location.pathname == "/dashboard/products-management" ? "active" : ""}
+                        >
+                            <div></div>
+                            <div></div>
+                            <IonIcon slot="start" icon={ list } color={"#FFF"}></IonIcon>
+                            <IonLabel className='dashboard-navigation-link'>Products Management</IonLabel>
+                        </IonItem>
                         <IonItem 
                             lines="full" 
                             routerLink="/dashboard/tasks" 
