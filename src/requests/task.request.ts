@@ -9,13 +9,26 @@ export interface iTask {
     taskActiveStatus: boolean
 }
 
-interface TaskReward {
+export interface iTaskV2 {
+    taskTitle: string,
+    taskReward: TaskRewardV2,
+    taskDescription: string,
+    customFields: tCustomField[],
+    taskActiveStatus: boolean
+}
+
+export interface TaskRewardV2 {
     currency: string;
     amount: Amount;
+}
+
+export interface TaskReward {
+    currency: string;
+    amount: number;
   }
   
-  interface Amount {
-    '$numberDecimal': string;
+  export interface Amount {
+    '$numberDecimal': number;
   }
 
 export const saveNewTaskToAPI = (task: iTask) => {

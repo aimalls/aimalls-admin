@@ -71,7 +71,7 @@ export const ParticipantsList: FC<iProps> = ({taskId}): JSX.Element => {
             <div>
                 { taskParticipants.length !== 0 ? 
                 <>
-                    { taskParticipants.map((participant) => (
+                    { taskParticipants ? taskParticipants.map((participant) => (
                     <IonCard key={participant._id}>
                         <IonCardContent>
                             <IonGrid>
@@ -88,11 +88,13 @@ export const ParticipantsList: FC<iProps> = ({taskId}): JSX.Element => {
                                                 participant.taskId.customFields.map((field: CustomField, index: number) => (
                                                     <div key={`custom-field-${index}`} style={{ display: 'flex', alignItems: 'center' }}>
                                                         <div>{ field.label }:</div>
+                                                        { participant.userInputs ? (
                                                         <div>
                                                             { field?.fieldType == 'file' ? 
                                                                 <a href={participant.userInputs[field.formControlName]} target="_blank">Click Here</a>
                                                             : participant.userInputs[field.formControlName] }
                                                         </div>
+                                                        ): null }
                                                     </div>
                                                 )) 
                                             }
@@ -107,7 +109,7 @@ export const ParticipantsList: FC<iProps> = ({taskId}): JSX.Element => {
                             </IonGrid>
                         </IonCardContent>
                     </IonCard>
-                    )) }
+                    )) : null }
                         
                 </>
                 : (
