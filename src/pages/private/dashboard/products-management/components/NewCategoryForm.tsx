@@ -16,6 +16,9 @@ export const NewCategoryForm: FC<iProps> = ({ onSuccess, onFormDismiss }): JSX.E
     const saveNewCategory = async () => {
         await present();
         try {
+            if (categoryName === '') {
+                throw new Error("Category name should be empty.")
+            }
             const params = {
                 categoryName
             }
@@ -29,6 +32,7 @@ export const NewCategoryForm: FC<iProps> = ({ onSuccess, onFormDismiss }): JSX.E
     }
     return (
         <>
+            { categoryName }
             <IonInput
                 type="text"
                 fill="outline"
@@ -37,7 +41,7 @@ export const NewCategoryForm: FC<iProps> = ({ onSuccess, onFormDismiss }): JSX.E
                 placeholder="Input Category Name"
                 style={{ marginBottom: '10px' }}
                 value={categoryName}
-                onIonChange={(e) => setCategoryName(e.detail.value!)}
+                onIonInput={(e) => setCategoryName(e.detail.value!)}
             />
             <IonButton expand="block" onClick={saveNewCategory}>Save</IonButton>
             <IonButton expand="block" onClick={onFormDismiss}>Cancel</IonButton>
