@@ -1,6 +1,6 @@
-import { IonButton, IonCol, IonContent, IonGrid, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonPage, IonRow, useIonAlert } from "@ionic/react";
+import { IonButton, IonCol, IonContent, IonGrid, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonPage, IonRow, useIonAlert, useIonLoading } from "@ionic/react";
 import { FC, useState } from "react";
-import { getAllParentCategoriesFromAPI, iProductCategory } from "../../../../requests/product-category.request";
+import { deleteCategoryToAPI, getAllParentCategoriesFromAPI, iProductCategory } from "../../../../requests/product-category.request";
 import { useQuery } from "@tanstack/react-query";
 
 export interface iProps {}
@@ -10,6 +10,7 @@ export const Categories: FC<iProps> = (props): JSX.Element => {
 
 
     const [presentAlert] = useIonAlert();
+    const [present, dismiss] = useIonLoading();
 
     const loadingComponentRequirementsQuery = useQuery(
         ["load-page-requirements"], () => loadComponentRequirements()
@@ -24,6 +25,23 @@ export const Categories: FC<iProps> = (props): JSX.Element => {
             presentAlert(err.message)
         }
         return false
+    }
+
+
+    const deleteCategory = async (categoryId: String) => {
+        try {
+            await present();
+            let params = {
+                categoryId
+            }
+            const result = await deleteCategoryToAPI(params);
+            loadComponentRequirements();
+            presentAlert(result.message)
+        } catch (error: any) {
+            presentAlert(error.message)
+        } finally {
+            await dismiss();
+        }
     }
     
     return (
@@ -46,7 +64,7 @@ export const Categories: FC<iProps> = (props): JSX.Element => {
                                                 </IonLabel>
                                             </IonItem>
                                             <IonItemOptions side="end">
-                                                <IonItemOption color={"danger"}>Delete</IonItemOption>
+                                                <IonItemOption color={"danger"} onClick={() => deleteCategory(parentCategory._id)}>Delete</IonItemOption>
                                                 <IonItemOption color={"primary"}>Update</IonItemOption>
                                             </IonItemOptions>
                                         

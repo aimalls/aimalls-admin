@@ -22,22 +22,6 @@ export const AddNewCategory: FC<iProps> = (props): JSX.Element => {
                         </IonCol>
                         <IonCol size="12">
                             <NewCategoryForm onSuccess={() => navigation.goBack()} />
-                            {/* <IonButton id="parent-category-select-btn" expand="block">Select Category</IonButton>
-                            <ParentCategorySelect onSelect={(value: iProductCategory) => setSelectedParentCategory(value)} onNew={handleOnNew} /> */}
-                            {/* <IonSelect
-                                interfaceOptions={{ header: 'Select Category' }} 
-                                cancelText="New"
-                                onIonCancel={() => handleAddNewCategory('')} 
-                                onIonChange={(e) => handleAddNewCategory(e.detail.value)} 
-                                okText="Select" interface="action-sheet"
-                                label="Please Select Category"
-                            >
-                                { parentCategories.map((parentCategory) => (
-                                    <IonSelectOption value={parentCategory.id}>
-                                        { parentCategory.name }
-                                    </IonSelectOption>
-                                )) }
-                            </IonSelect> */}
                         </IonCol>
                     </IonRow>
                 </IonGrid>
