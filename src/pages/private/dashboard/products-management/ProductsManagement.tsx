@@ -9,7 +9,7 @@ export const ProductsManagement: FC<iProps> = (props): JSX.Element => {
                 <IonGrid className="container">
                     <IonRow>
                         <IonCol size="12" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span className="page-title">Tasks</span>
+                            <span className="page-title">Products Management</span>
                         </IonCol>
                         <IonCol size="12" sizeMd="4">
                         <IonCard routerLink="products-management/categories">
@@ -20,8 +20,8 @@ export const ProductsManagement: FC<iProps> = (props): JSX.Element => {
 
                             <IonCardContent>Here's a small text description for the card content. Nothing more, nothing less.</IonCardContent>
 
-                            <IonButton fill="clear">Action 1</IonButton>
-                            <IonButton fill="clear">Action 2</IonButton>
+                            {/* <IonButton fill="clear">Action 1</IonButton>
+                            <IonButton fill="clear">Action 2</IonButton> */}
                         </IonCard>
                         </IonCol>
                     </IonRow>
