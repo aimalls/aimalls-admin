@@ -32,7 +32,6 @@ export const NewCategoryForm: FC<iProps> = ({ onSuccess, onFormDismiss }): JSX.E
     }
     return (
         <>
-            { categoryName }
             <IonInput
                 type="text"
                 fill="outline"

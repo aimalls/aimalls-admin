@@ -1,5 +1,5 @@
 import { FC, useRef, useState } from "react";
-import { IonButton, IonButtons, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonList, IonLoading, IonModal, IonPage, IonRow, IonTitle, IonToolbar, useIonAlert } from "@ionic/react";
+import { IonButton, IonButtons, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonLoading, IonModal, IonPage, IonRow, IonTitle, IonToolbar, useIonAlert } from "@ionic/react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllParentCategoriesFromAPI, iProductCategory } from "../../../../../requests/product-category.request";
 import { useProductCategory } from "../../../../../hooks/useProductCategory";
@@ -69,11 +69,25 @@ export const ParentCategorySelect: FC<iProps> = ({ onSelect, onNew }): JSX.Eleme
                                 <NewCategoryForm onFormDismiss={() => setIsNewCategory(false)} onSuccess={() => handleNewCategoryFormSuccess()} />
                             ): (
                                 <IonCol size="12">
-                                    <IonList>
+                                    <IonList lines="full">
                                         { parentCategories.map((parentCategory, index) => (
-                                            <IonItem key={index}>
-                                                { parentCategory.name }
-                                            </IonItem>
+                                            <div key={index}>
+                                                <IonItemSliding>
+                                                    {/* <IonItemOptions side="start">
+                                                        <IonItemOption color={"success"}>Archive</IonItemOption>
+                                                    </IonItemOptions> */}
+                                                    <IonItem  button>
+                                                        <IonLabel>
+                                                            { parentCategory.name }
+                                                        </IonLabel>
+                                                    </IonItem>
+                                                    <IonItemOptions side="end">
+                                                        <IonItemOption color={"danger"}>Delete</IonItemOption>
+                                                        <IonItemOption color={"primary"}>Update</IonItemOption>
+                                                    </IonItemOptions>
+                                                
+                                                </IonItemSliding>
+                                            </div>
                                         )) }
                                     </IonList>
                                 </IonCol>
