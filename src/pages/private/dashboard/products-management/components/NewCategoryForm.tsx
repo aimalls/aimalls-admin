@@ -4,9 +4,8 @@ import { saveNewCategoryToAPI } from "../../../../../requests/product-category.r
 
 export interface iProps {
     onSuccess: () => void,
-    onFormDismiss: () => void
 }
-export const NewCategoryForm: FC<iProps> = ({ onSuccess, onFormDismiss }): JSX.Element => {
+export const NewCategoryForm: FC<iProps> = ({ onSuccess }): JSX.Element => {
 
     const [categoryName, setCategoryName] = useState('');
 
@@ -43,7 +42,6 @@ export const NewCategoryForm: FC<iProps> = ({ onSuccess, onFormDismiss }): JSX.E
                 onIonInput={(e) => setCategoryName(e.detail.value!)}
             />
             <IonButton expand="block" onClick={saveNewCategory}>Save</IonButton>
-            <IonButton expand="block" onClick={onFormDismiss}>Cancel</IonButton>
         </>
     )
 };

@@ -73,9 +73,6 @@ export const ParentCategorySelect: FC<iProps> = ({ onSelect, onNew }): JSX.Eleme
                                         { parentCategories.map((parentCategory, index) => (
                                             <div key={index}>
                                                 <IonItemSliding>
-                                                    {/* <IonItemOptions side="start">
-                                                        <IonItemOption color={"success"}>Archive</IonItemOption>
-                                                    </IonItemOptions> */}
                                                     <IonItem  button>
                                                         <IonLabel>
                                                             { parentCategory.name }
