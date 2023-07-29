@@ -1,5 +1,5 @@
 import { IonButton, IonContent, IonIcon, IonItem, IonLabel, IonList, IonMenu, IonPage, IonRouterOutlet, IonSplitPane, useIonAlert } from '@ionic/react'
-import React, { FC, useContext } from 'react'
+import React, { FC, useContext, useEffect } from 'react'
 import '../../styles/layouts/DashboardLayoutV2.scss'
 
 import logoFull from '../../assets/images/logo-full.png'
@@ -15,6 +15,9 @@ export const DashboardLayoutV2: FC<iProps> = (props: any): JSX.Element => {
     const { user } = useContext(UserContext)
     const [presentAlert] = useIonAlert();
 
+    useEffect(() => {
+        console.log(navigation)
+    }, [navigation])
 
     
 

@@ -1,11 +1,12 @@
 import { IonButton, IonInput, useIonAlert, useIonLoading } from "@ionic/react";
 import { FC, useState } from "react";
-import { saveNewCategoryToAPI } from "../../../../../requests/product-category.request";
+import { iProductCategory, saveNewCategoryToAPI } from "../../../../../requests/product-category.request";
 
 export interface iProps {
+    parent?: iProductCategory['_id']
     onSuccess: () => void,
 }
-export const NewCategoryForm: FC<iProps> = ({ onSuccess }): JSX.Element => {
+export const NewCategoryForm: FC<iProps> = ({ onSuccess, parent }): JSX.Element => {
 
     const [categoryName, setCategoryName] = useState('');
 
@@ -19,9 +20,11 @@ export const NewCategoryForm: FC<iProps> = ({ onSuccess }): JSX.Element => {
                 throw new Error("Category name should be empty.")
             }
             const params = {
-                categoryName
+                categoryName,
+                parent
             }
             await saveNewCategoryToAPI(params);
+            setCategoryName('')
             onSuccess();
         } catch (err: any){
             presentAlert(err.message);
