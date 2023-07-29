@@ -3,7 +3,7 @@ import React, { FC, useContext, useEffect } from 'react'
 import '../../styles/layouts/DashboardLayoutV2.scss'
 
 import logoFull from '../../assets/images/logo-full.png'
-import { homeOutline, list, logOut, mail } from 'ionicons/icons'
+import { cogOutline, homeOutline, list, logOut, mail } from 'ionicons/icons'
 import { useHistory } from 'react-router'
 import { UserContext } from '../../contexts/userContext'
 import { Logout } from '../../requests/auth.request'
@@ -72,6 +72,17 @@ export const DashboardLayoutV2: FC<iProps> = (props: any): JSX.Element => {
                             <div></div>
                             <IonIcon slot="start" icon={ list } color={"#FFF"}></IonIcon>
                             <IonLabel className='dashboard-navigation-link'>Tasks</IonLabel>
+                        </IonItem>
+                        <IonItem 
+                            lines="full" 
+                            routerLink="/dashboard/app-settings" 
+                            detail={false} 
+                            className={ navigation.location.pathname == "/dashboard/app-settings" ? "active" : ""}
+                        >
+                            <div></div>
+                            <div></div>
+                            <IonIcon slot="start" icon={ cogOutline } color={"#FFF"}></IonIcon>
+                            <IonLabel className='dashboard-navigation-link'>App Settings</IonLabel>
                         </IonItem>
                         <IonItem lines='full' onClick={processLogout} detail={false}>
                             <IonIcon slot="start" icon={ logOut } color={"#FFF"}></IonIcon>
