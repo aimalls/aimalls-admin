@@ -8,6 +8,7 @@ import { useHistory } from 'react-router'
 import { UserContext } from '../../contexts/userContext'
 import { Logout } from '../../requests/auth.request'
 import DashboardRoutes from '../../routes/private/dashboard/DashboardRoutes'
+import navigationList from '../../config/navigation'
 
 export interface iProps {}
 export const DashboardLayoutV2: FC<iProps> = (props: any): JSX.Element => {
@@ -41,49 +42,19 @@ export const DashboardLayoutV2: FC<iProps> = (props: any): JSX.Element => {
                                 <img src={logoFull} alt="logo" />
                             </div>
                         </IonItem>
-                        <IonItem 
-                            lines='full' 
-                            routerLink='/dashboard' 
-                            detail={false} 
-                            className={ navigation.location.pathname == "/dashboard" ? "active" : ""}
-                        >
-                            <div></div>
-                            <div></div>
-                            <IonIcon slot='start' icon={homeOutline} color={'#fff'}></IonIcon>
-                            <IonLabel className='dashboard-navigation-link'>Dashboard</IonLabel>
-                        </IonItem>
-                        <IonItem lines="full" 
-                            routerLink="/dashboard/products-management"
-                            detail={false} 
-                            className={ navigation.location.pathname == "/dashboard/products-management" ? "active" : ""}
-                        >
-                            <div></div>
-                            <div></div>
-                            <IonIcon slot="start" icon={ list } color={"#FFF"}></IonIcon>
-                            <IonLabel className='dashboard-navigation-link'>Products Management</IonLabel>
-                        </IonItem>
-                        <IonItem 
-                            lines="full" 
-                            routerLink="/dashboard/tasks" 
-                            detail={false} 
-                            className={ navigation.location.pathname == "/dashboard/tasks" ? "active" : ""}
-                        >
-                            <div></div>
-                            <div></div>
-                            <IonIcon slot="start" icon={ list } color={"#FFF"}></IonIcon>
-                            <IonLabel className='dashboard-navigation-link'>Tasks</IonLabel>
-                        </IonItem>
-                        <IonItem 
-                            lines="full" 
-                            routerLink="/dashboard/app-settings" 
-                            detail={false} 
-                            className={ navigation.location.pathname == "/dashboard/app-settings" ? "active" : ""}
-                        >
-                            <div></div>
-                            <div></div>
-                            <IonIcon slot="start" icon={ cogOutline } color={"#FFF"}></IonIcon>
-                            <IonLabel className='dashboard-navigation-link'>App Settings</IonLabel>
-                        </IonItem>
+                        { navigationList.map(nav => (
+                            <IonItem 
+                                lines={nav.lines} 
+                                routerLink={nav.link} 
+                                detail={false} 
+                                className={ navigation.location.pathname == nav.link ? "active" : ""}
+                            >
+                                <div></div>
+                                <div></div>
+                                <IonIcon slot='start' icon={nav.icon} color={nav.color}></IonIcon>
+                                <IonLabel className='dashboard-navigation-link'>{ nav.text}</IonLabel>
+                            </IonItem>
+                        )) }
                         <IonItem lines='full' onClick={processLogout} detail={false}>
                             <IonIcon slot="start" icon={ logOut } color={"#FFF"}></IonIcon>
                             <IonLabel className='dashboard-navigation-link'>
