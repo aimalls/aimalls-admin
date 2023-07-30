@@ -98,7 +98,7 @@ export const SellerAppVersion: FC<iProps> = (props): JSX.Element => {
                 <IonGrid>
                     <IonRow>
                         <IonCol size="12" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span className="page-title">App Version</span>
+                            <span className="page-title">Seller App Version</span>
                             <IonButton onClick={() => saveVersionUpdate()}>Save</IonButton>
                         </IonCol>
                         <IonCol size="12">
@@ -118,20 +118,6 @@ export const SellerAppVersion: FC<iProps> = (props): JSX.Element => {
                                         </IonItemOptions>
                                     </IonItemSliding>
                                 )) }
-                                
-                                <IonItemSliding>
-                                    <IonItem>
-                                        <IonLabel>
-                                            Android Version URL
-                                        </IonLabel>
-                                        <IonLabel slot="end">
-                                            { appVersion.android_version_url }
-                                        </IonLabel>
-                                    </IonItem>
-                                    <IonItemOptions side="end">
-                                        <IonItemOption color={"primary"} onClick={() => toggleAppVersionUpdateModal("android_version_url")}>Update</IonItemOption>
-                                    </IonItemOptions>
-                                </IonItemSliding>
                             </IonList>
                         </IonCol>
                     </IonRow>
