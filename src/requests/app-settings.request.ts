@@ -27,8 +27,13 @@ export const saveMaintenanceModeStatusToAPI = (params: any) => {
     .catch(err => Promise.reject(err.response.data))
 }
 
-export const saveVersionUpdateToAPI = (appVersion: iAppVersion) => {
-    return HTTP_API().post("/app-setting/save-app-version-update", appVersion)
+export const saveShopperAppVersionUpdateToAPI = (appVersion: iAppVersion) => {
+    return HTTP_API().post("/app-setting/save-shopper-app-version-update", appVersion)
+    .then(response => response.data)
+    .catch(err => Promise.reject(err.response.data))
+}
+export const saveSellerAppVersionUpdateToAPI = (appVersion: iAppVersion) => {
+    return HTTP_API().post("/app-setting/save-seller-app-version-update", appVersion)
     .then(response => response.data)
     .catch(err => Promise.reject(err.response.data))
 }

@@ -28,13 +28,21 @@ export const AppSettings: FC<iProps> = (props): JSX.Element => {
             }
 
 
-
         }
     }, [AppSettings])
 
-    const appV = useMemo(() => {
+    const shopperAppV = useMemo(() => {
         if (AppSettings) {
-            const appVResult: iAppSetting = AppSettingsQuery.data.find((v: iAppSetting) => v.name == "appVersion");
+            const appVResult: iAppSetting = AppSettingsQuery.data.find((v: iAppSetting) => v.name == "shopperAppVersion");
+            if (appVResult) {
+                return appVResult.value
+            } 
+        } 
+    }, [AppSettings]) as iAppVersion
+
+    const sellerAppV = useMemo(() => {
+        if (AppSettings) {
+            const appVResult: iAppSetting = AppSettingsQuery.data.find((v: iAppSetting) => v.name == "sellerAppVersion");
             if (appVResult) {
                 return appVResult.value
             } 
@@ -74,10 +82,16 @@ export const AppSettings: FC<iProps> = (props): JSX.Element => {
                         </IonCol>
                         <IonCol size="12">
                             <IonList inset>
-                                <IonItem detail button routerLink="/dashboard/app-settings/app-version">
-                                    <IonLabel>App Version</IonLabel>
-                                    { appV ? (
-                                        <IonLabel slot="end">{ appV.version }</IonLabel>
+                                <IonItem detail button routerLink="/dashboard/app-settings/shopper-app-version">
+                                    <IonLabel>Shopper App Version</IonLabel>
+                                    { shopperAppV ? (
+                                        <IonLabel slot="end">{ shopperAppV.version }</IonLabel>
+                                    ): null }
+                                </IonItem>
+                                <IonItem detail button routerLink="/dashboard/app-settings/seller-app-version">
+                                    <IonLabel>Seller App Version</IonLabel>
+                                    { sellerAppV ? (
+                                        <IonLabel slot="end">{ sellerAppV.version }</IonLabel>
                                     ): null }
                                 </IonItem>
                                 <IonItem>

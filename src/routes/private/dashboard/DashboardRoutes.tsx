@@ -9,7 +9,8 @@ import Task from "../../../pages/private/dashboard/tasks/Task";
 import ProductsManagement from "../../../pages/private/dashboard/products-management/ProductsManagement";
 import Categories from "../../../pages/private/dashboard/products-management/Categories";
 import AppSettings from "../../../pages/private/dashboard/app-settings/AppSettings";
-import AppVersion from "../../../pages/private/dashboard/app-settings/AppVersion";
+import ShopperAppVersion from "../../../pages/private/dashboard/app-settings/ShopperAppVersion";
+import SellerAppVersion from "../../../pages/private/dashboard/app-settings/SellerAppVersion";
 
 export interface iProps {}
 export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
@@ -34,8 +35,11 @@ export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
             <Route exact path="/dashboard/app-settings">
                 <AppSettings />
             </Route>
-            <Route exact path="/dashboard/app-settings/app-version">
-                <AppVersion />
+            <Route exact path="/dashboard/app-settings/shopper-app-version">
+                <ShopperAppVersion />
+            </Route>
+            <Route exact path="/dashboard/app-settings/seller-app-version">
+                <SellerAppVersion />
             </Route>
 
             <Route path="/dashboard/tasks/task/:id">

@@ -1,10 +1,10 @@
 import { FC, useEffect, useMemo, useState } from "react";
 import { IonButton, IonCol, IonContent, IonGrid, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonPage, IonRow, useIonAlert, useIonLoading } from "@ionic/react";
 import { useQuery } from "@tanstack/react-query";
-import { getAllAppSettingsFromAPI, iAppSetting, iAppVersion, saveVersionUpdateToAPI } from "../../../../requests/app-settings.request";
+import { getAllAppSettingsFromAPI, iAppSetting, iAppVersion, saveSellerAppVersionUpdateToAPI } from "../../../../requests/app-settings.request";
 import { AppVersionUpdateModal } from "./components/AppVersionUpdateModal";
 export interface iProps {}
-export const AppVersion: FC<iProps> = (props): JSX.Element => {
+export const SellerAppVersion: FC<iProps> = (props): JSX.Element => {
 
     const [presentAlert] = useIonAlert();
     const [present, dismiss] = useIonLoading();
@@ -29,7 +29,7 @@ export const AppVersion: FC<iProps> = (props): JSX.Element => {
 
     useEffect(() => {
         if (AppSettings) {
-            const AppVersionResult: iAppSetting = AppSettings.find((v: iAppSetting) => v.name == "appVersion")
+            const AppVersionResult: iAppSetting = AppSettings.find((v: iAppSetting) => v.name == "sellerAppVersion")
             
             if (AppVersionResult) {
                 const AppVersion = AppVersionResult.value as iAppVersion;
@@ -83,7 +83,7 @@ export const AppVersion: FC<iProps> = (props): JSX.Element => {
     const saveVersionUpdate = async () => {
         await present();
         try {
-            const result = await saveVersionUpdateToAPI(appVersion)
+            const result = await saveSellerAppVersionUpdateToAPI(appVersion)
             presentAlert(result.message);
         } catch (err: any) {
             presentAlert(err.message)
@@ -149,4 +149,4 @@ export const AppVersion: FC<iProps> = (props): JSX.Element => {
         </IonPage>
     )
 };
-export default AppVersion;
+export default SellerAppVersion;
