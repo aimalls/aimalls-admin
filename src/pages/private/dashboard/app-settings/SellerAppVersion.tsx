@@ -1,8 +1,11 @@
 import { FC, useEffect, useMemo, useState } from "react";
-import { IonButton, IonCol, IonContent, IonGrid, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonPage, IonRow, useIonAlert, useIonLoading } from "@ionic/react";
+import { IonBackButton, IonButton, IonCol, IonContent, IonGrid, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonPage, IonRow, useIonAlert, useIonLoading } from "@ionic/react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllAppSettingsFromAPI, iAppSetting, iAppVersion, saveSellerAppVersionUpdateToAPI } from "../../../../requests/app-settings.request";
 import { AppVersionUpdateModal } from "./components/AppVersionUpdateModal";
+import { chevronBackCircleOutline, chevronBackOutline } from "ionicons/icons";
+import PageHeader from "../../../../layouts/dashboard/PageHeader";
+
 export interface iProps {}
 export const SellerAppVersion: FC<iProps> = (props): JSX.Element => {
 
@@ -94,12 +97,18 @@ export const SellerAppVersion: FC<iProps> = (props): JSX.Element => {
 
     return (
         <IonPage>
+            <div className="ion-hide-md-up">
+                <PageHeader/>
+            </div>
             <IonContent>
                 <IonGrid>
                     <IonRow>
                         <IonCol size="12" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span className="page-title">App Version</span>
-                            <IonButton onClick={() => saveVersionUpdate()}>Save</IonButton>
+                            <div style={{display: "flex",alignItems: "center"}}>
+                                <IonBackButton mode="md" icon={chevronBackOutline} defaultHref="/dashboard/app-settings"></IonBackButton>
+                                <span className="page-title">Seller App Version</span>
+                            </div>
+                                <IonButton onClick={() => saveVersionUpdate()}>Save</IonButton>
                         </IonCol>
                         <IonCol size="12">
                             <IonList>

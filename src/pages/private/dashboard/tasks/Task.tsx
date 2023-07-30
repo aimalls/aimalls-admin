@@ -6,6 +6,7 @@ import { getTaskByIDFromAPI, iTask, iTaskV2 } from "../../../../requests/task.re
 import { useQuery } from "@tanstack/react-query";
 import { getAllCheckedParticipantsTaskFromAPI, getTaskParticipantsFromAPI } from "../../../../requests/user-task.request";
 import CheckParticipantsTask from "./components/CheckParticipantsTask";
+import PageHeader from "../../../../layouts/dashboard/PageHeader";
 
 export interface iProps {}
 export const Task: FC<iProps> = (props): JSX.Element => {
@@ -20,13 +21,16 @@ export const Task: FC<iProps> = (props): JSX.Element => {
 
     return (
         <IonPage>
+            <div className="ion-hide-md-up">
+                <PageHeader/>
+            </div>
             <IonContent>
                 <IonGrid>
                     { task ?
                     <IonRow>
                         <IonCol size="12" sizeMd="4">
                             <div>Task: { task.taskTitle }</div>
-                            <div>Reward: { `${task.taskReward.amount.$numberDecimal} ${task.taskReward.currency}` }</div>
+                            {/* <div>Reward: { `${task.taskReward.amount.$numberDecimal} ${task.taskReward.currency}` }</div> */}
                         </IonCol>
                     </IonRow>
                     : null }
