@@ -3,6 +3,7 @@ import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonItem, IonItemOpti
 import "../../../../styles/pages/private/dashboard/AppSettings.scss"
 import { useQuery } from "@tanstack/react-query";
 import { getAllAppSettingsFromAPI, iAppSetting, iAppVersion, saveMaintenanceModeStatusToAPI } from "../../../../requests/app-settings.request";
+import PageHeader from "../../../../layouts/dashboard/PageHeader";
 export interface iProps { }
 export const AppSettings: FC<iProps> = (props): JSX.Element => {
 
@@ -74,6 +75,9 @@ export const AppSettings: FC<iProps> = (props): JSX.Element => {
 
     return (
         <IonPage id="app-settings">
+            <div className="ion-hide-md-up">
+                <PageHeader/>
+            </div>
             <IonContent>
                 <IonGrid>
                     <IonRow>

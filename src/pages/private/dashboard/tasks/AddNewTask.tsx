@@ -5,6 +5,7 @@ import { TaskReward, iTask, saveNewTaskToAPI } from "../../../../requests/task.r
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import { useHistory } from "react-router";
+import PageHeader from "../../../../layouts/dashboard/PageHeader";
 
 export interface iProps {}
 export const AddNewTask: FC<iProps> = (props): JSX.Element => {
@@ -63,6 +64,9 @@ export const AddNewTask: FC<iProps> = (props): JSX.Element => {
 
     return (
         <IonContent>
+            <div className="ion-hide-md-up">
+                <PageHeader/>
+            </div>
             <IonGrid>
                 <IonRow>
                     <IonCol size="12">

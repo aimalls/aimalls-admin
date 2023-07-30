@@ -5,6 +5,7 @@ import { deleteCategoryToAPI, getAllParentCategoriesFromAPI, getProductCategorie
 import NewCategoryForm from "./components/NewCategoryForm";
 import { chevronForward } from "ionicons/icons";
 import UpdateCategoryForm from "./components/UpdateCategoryForm";
+import PageHeader from "../../../../layouts/dashboard/PageHeader";
 
 export interface iProps {}
 export const Categories: FC<iProps> = (props): JSX.Element => {
@@ -129,6 +130,9 @@ export const Categories: FC<iProps> = (props): JSX.Element => {
     
     return (
         <IonPage>
+            <div className="ion-hide-md-up">
+                <PageHeader/>
+            </div>
             <IonContent>
                 <IonGrid className="container">
                     <IonRow>

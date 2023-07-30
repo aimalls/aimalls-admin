@@ -3,6 +3,7 @@ import { FC, useState } from "react";
 import useTask from "../../../../hooks/useTask";
 import '../../../../styles/pages/private/dashboard/Task.scss'
 import { useHistory } from "react-router";
+import PageHeader from "../../../../layouts/dashboard/PageHeader";
 
 
 
@@ -15,6 +16,9 @@ export const Tasks: FC<iProps> = (props): JSX.Element => {
 
     return (
         <IonPage>
+            <div className="ion-hide-md-up">
+                <PageHeader/>
+            </div>
             <IonContent>
                 <IonGrid id="task">
                     <IonRow className="ion-justify-content-center">
