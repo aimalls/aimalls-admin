@@ -18,7 +18,7 @@ export const ProductsManagement: FC<iProps> = (props): JSX.Element => {
                                 {/* <IonCardSubtitle>Card Subtitle</IonCardSubtitle> */}
                             </IonCardHeader>
 
-                            <IonCardContent>Here's a small text description for the card content. Nothing more, nothing less.</IonCardContent>
+                            <IonCardContent>A tool for managing product categories Like Women's Wear, Men's Wear and all the hierarchies of each product categories</IonCardContent>
 
                             {/* <IonButton fill="clear">Action 1</IonButton>
                             <IonButton fill="clear">Action 2</IonButton> */}

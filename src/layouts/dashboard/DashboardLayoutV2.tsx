@@ -16,9 +16,7 @@ export const DashboardLayoutV2: FC<iProps> = (props: any): JSX.Element => {
     const { user } = useContext(UserContext)
     const [presentAlert] = useIonAlert();
 
-    useEffect(() => {
-        console.log(navigation)
-    }, [navigation])
+  
 
     
 
@@ -42,8 +40,9 @@ export const DashboardLayoutV2: FC<iProps> = (props: any): JSX.Element => {
                                 <img src={logoFull} alt="logo" />
                             </div>
                         </IonItem>
-                        { navigationList.map(nav => (
+                        { navigationList.map((nav, index) => (
                             <IonItem 
+                                key={`nav-${index}`}
                                 lines={nav.lines} 
                                 routerLink={nav.link} 
                                 detail={false} 

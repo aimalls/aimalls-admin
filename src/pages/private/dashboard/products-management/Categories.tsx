@@ -1,7 +1,7 @@
 import { IonBreadcrumb, IonBreadcrumbs, IonButton, IonCol, IonContent, IonGrid, IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonPage, IonRow, useIonAlert, useIonLoading } from "@ionic/react";
 import { FC, useEffect, useState } from "react";
 import { deleteCategoryToAPI, getAllParentCategoriesFromAPI, getProductCategoriesByParentFromAPI, iProductCategory } from "../../../../requests/product-category.request";
-import { useQuery } from "@tanstack/react-query";
+
 import NewCategoryForm from "./components/NewCategoryForm";
 import { chevronForward } from "ionicons/icons";
 import UpdateCategoryForm from "./components/UpdateCategoryForm";
@@ -72,8 +72,6 @@ export const Categories: FC<iProps> = (props): JSX.Element => {
                     }
                 }) as iProductCategory[]
 
-                console.log(cc)
-
                 return c = cc
             })
             getProductCategoriesByParent(currentSelectedCategory)
@@ -86,6 +84,7 @@ export const Categories: FC<iProps> = (props): JSX.Element => {
     const handleNewCategoryFormSuccess = () => {
         if (currentSelectedCategory !== '') {
             getProductCategoriesByParent(currentSelectedCategory)
+            setUpdateCategoryFormHidden(true)
         } else {
             loadComponentRequirements()
         }
@@ -142,7 +141,7 @@ export const Categories: FC<iProps> = (props): JSX.Element => {
                         </IonCol>
                         { !updateCategoryFormHidden ? (
                         <IonCol size="12">
-                            <UpdateCategoryForm onDismiss={() => {}} productCategory={selectedProductCategoryForUpdate!} onSuccess={() => handleNewCategoryFormSuccess()} />
+                            <UpdateCategoryForm onDismiss={() => setUpdateCategoryFormHidden(true)} productCategory={selectedProductCategoryForUpdate!} onSuccess={() => handleNewCategoryFormSuccess()} />
                         </IonCol>
                         ): null }
                         <IonCol size="12">

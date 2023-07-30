@@ -8,7 +8,7 @@ export interface iProps {
     onSuccess: () => void,
     onDismiss: () => void
 }
-export const UpdateCategoryForm: FC<iProps> = ({ onSuccess, productCategory }): JSX.Element => {
+export const UpdateCategoryForm: FC<iProps> = ({ onSuccess, productCategory, onDismiss }): JSX.Element => {
 
     const [categoryName, setCategoryName] = useState<iProductCategory['name']>('');
     const [parent, setParent] = useState<iProductCategory | null>(null);
@@ -37,10 +37,8 @@ export const UpdateCategoryForm: FC<iProps> = ({ onSuccess, productCategory }): 
             setParent((c) => {
                 const parentFound = allProductCategories.find(v => v._id == productCategory.parent) as iProductCategory
                 if (!parentFound) {
-                    console.log('no parent found')
                     return null
                 } else {
-                    console.log('parent found')
                     return parentFound
                 }
             })
@@ -94,6 +92,7 @@ export const UpdateCategoryForm: FC<iProps> = ({ onSuccess, productCategory }): 
                 onIonInput={(e) => setCategoryName(e.detail.value!)}
             />
             <IonButton expand="block" onClick={saveUpdatedProductCategory}>Save</IonButton>
+            <IonButton expand="block" onClick={onDismiss}>Cancel</IonButton>
         </>
     )
 };

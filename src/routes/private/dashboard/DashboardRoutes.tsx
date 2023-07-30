@@ -9,6 +9,7 @@ import Task from "../../../pages/private/dashboard/tasks/Task";
 import ProductsManagement from "../../../pages/private/dashboard/products-management/ProductsManagement";
 import Categories from "../../../pages/private/dashboard/products-management/Categories";
 import AppSettings from "../../../pages/private/dashboard/app-settings/AppSettings";
+import AppVersion from "../../../pages/private/dashboard/app-settings/AppVersion";
 
 export interface iProps {}
 export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
@@ -29,9 +30,14 @@ export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
             <Route exact path="/dashboard/tasks/new">
                 <AddNewTask />
             </Route>
+
             <Route exact path="/dashboard/app-settings">
                 <AppSettings />
             </Route>
+            <Route exact path="/dashboard/app-settings/app-version">
+                <AppVersion />
+            </Route>
+
             <Route path="/dashboard/tasks/task/:id">
                 <Task />
             </Route>
