@@ -1,4 +1,4 @@
-import { cogOutline, homeOutline, list } from 'ionicons/icons'
+import { cartOutline, cogOutline, homeOutline, list, peopleCircle, shieldCheckmark } from 'ionicons/icons'
 export interface iNavigation {
     lines: "full" | "none" | "inset" | undefined,
     text: string,
@@ -17,7 +17,7 @@ export default [
     {
         lines: 'full',
         text: 'Products Management',
-        icon: list,
+        icon: cartOutline,
         color: "#FFF",
         link: "/dashboard/products-management"
     },
@@ -27,6 +27,20 @@ export default [
         icon: list,
         color: "#FFF",
         link: "/dashboard/tasks"
+    },
+    {
+        lines: 'full',
+        text: 'Users',
+        icon: peopleCircle,
+        color: "#FFF",
+        link: "/dashboard/users"
+    },
+    {
+        lines: 'full',
+        text: 'Roles',
+        icon: shieldCheckmark,
+        color: "#FFF",
+        link: "/dashboard/roles"
     },
     {
         lines: 'full',

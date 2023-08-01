@@ -9,8 +9,15 @@ import Task from "../../../pages/private/dashboard/tasks/Task";
 import ProductsManagement from "../../../pages/private/dashboard/products-management/ProductsManagement";
 import Categories from "../../../pages/private/dashboard/products-management/Categories";
 import AppSettings from "../../../pages/private/dashboard/app-settings/AppSettings";
+
 import ShopperAppVersion from "../../../pages/private/dashboard/app-settings/ShopperAppVersion";
 import SellerAppVersion from "../../../pages/private/dashboard/app-settings/SellerAppVersion";
+import Users from "../../../pages/private/dashboard/users/Users";
+import UserView from "../../../pages/private/dashboard/users/UserView";
+import Roles from "../../../pages/private/dashboard/roles/Roles";
+import AddNewRole from "../../../pages/private/dashboard/roles/AddNewRole";
+import RolePolicies from "../../../pages/private/dashboard/roles/RolePolicies";
+import AddNewRolePolicy from "../../../pages/private/dashboard/roles/AddNewRolePolicy";
 
 export interface iProps {}
 export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
@@ -30,6 +37,25 @@ export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
             </Route>
             <Route exact path="/dashboard/tasks/new">
                 <AddNewTask />
+            </Route>
+            <Route exact path="/dashboard/users">
+                <Users />
+            </Route>
+            <Route exact path="/dashboard/users/:id">
+                <UserView />
+            </Route>
+
+            <Route exact path="/dashboard/roles">
+                <Roles />
+            </Route>
+            <Route exact path="/dashboard/roles/new">
+                <AddNewRole />
+            </Route>
+            <Route exact path="/dashboard/roles/policies">
+                <RolePolicies />
+            </Route>
+            <Route exact path="/dashboard/roles/policies/new">
+                <AddNewRolePolicy />
             </Route>
 
             <Route exact path="/dashboard/app-settings">

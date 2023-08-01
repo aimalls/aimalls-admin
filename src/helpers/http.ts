@@ -44,6 +44,21 @@ export const HTTP_API = (payload?: any) => {
                 // localStorage.removeItem("authToken");
                 // location.assign("/login")
             }
+
+
+            if (error.response.status == 404) {
+                return Promise.reject("API Route not found.")
+            }
+
+            if (error.response.data.data) {
+                return Promise.reject(error.response.data)
+            }
+
+            if (error.response.data.message) {
+                return Promise.reject(error.response.data.message)
+            }
+
+            return Promise.reject(error.response.statusText)
             // if (error.response.status == 401 && !error.response.data.authorization) {
             //     eventBus.$emit('unauthorized')
             // }
@@ -53,7 +68,6 @@ export const HTTP_API = (payload?: any) => {
             // if (error.response.status == 401 && error.response.data.authorization == 'non-member') {
             //     eventBus.$emit('non-member')
             // }
-            return Promise.reject(error);
         }
     );
 
