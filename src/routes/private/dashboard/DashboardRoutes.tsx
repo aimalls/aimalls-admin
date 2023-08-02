@@ -18,6 +18,7 @@ import Roles from "../../../pages/private/dashboard/roles/Roles";
 import AddNewRole from "../../../pages/private/dashboard/roles/AddNewRole";
 import RolePolicies from "../../../pages/private/dashboard/roles/RolePolicies";
 import AddNewRolePolicy from "../../../pages/private/dashboard/roles/AddNewRolePolicy";
+import UpdateRolePolicy from "../../../pages/private/dashboard/roles/UpdateRolePolicy";
 
 export interface iProps {}
 export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
@@ -56,6 +57,9 @@ export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
             </Route>
             <Route exact path="/dashboard/roles/policies/new">
                 <AddNewRolePolicy />
+            </Route>
+            <Route exact path="/dashboard/roles/policies/:id/update">
+                <UpdateRolePolicy />
             </Route>
 
             <Route exact path="/dashboard/app-settings">

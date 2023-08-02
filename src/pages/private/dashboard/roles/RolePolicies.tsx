@@ -2,37 +2,11 @@ import { FC } from "react";
 import { IonButton, IonCol, IonContent, IonGrid, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonLoading, IonPage, IonRow, useIonAlert, useIonLoading, useIonModal } from "@ionic/react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllRolePoliciesFromAPI, iRolePolicy, processRolePolicyDeleteToAPI } from "../../../../requests/role-policy.request";
+import { useRolePolicy } from "../../../../hooks/useRolePolicy";
 export interface iProps {}
 export const RolePolicies: FC<iProps> = (props): JSX.Element => {
 
-    const [present, dismiss] = useIonLoading();
-    const [presentAlert] = useIonAlert();
-
-    const rolePoliciesQuery = useQuery(["rolePoliciesQuery"], () => getAllRolePoliciesFromAPI())
-
-
-    const rolePolicies: iRolePolicy[] = rolePoliciesQuery.data;
-
-  
-
-
-
-    const processRolePolicyDelete = async (id: iRolePolicy['_id']) => {
-        try {
-            await present();                
-            const result = await processRolePolicyDeleteToAPI(id);
-
-            presentAlert(result.message)
-
-            rolePoliciesQuery.refetch()
-            
-        } catch (err: any) {
-            presentAlert(err)
-        } finally {
-            await dismiss();
-        }
-        
-    }
+    const { processRolePolicyDelete, rolePoliciesQuery, rolePolicies } = useRolePolicy()
 
     return (
         <IonPage>
@@ -58,7 +32,7 @@ export const RolePolicies: FC<iProps> = (props): JSX.Element => {
                                             </IonItem>
                                             <IonItemOptions slot="end">
                                                 <IonItemOption color={"danger"} onClick={() => processRolePolicyDelete(value._id)}>Delete</IonItemOption>
-                                                <IonItemOption>Update</IonItemOption>
+                                                <IonItemOption routerLink={`/dashboard/roles/policies/${value._id}/update`}>Update</IonItemOption>
                                             </IonItemOptions>
                                         </IonItemSliding>
                                     )) }

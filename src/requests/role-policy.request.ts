@@ -26,3 +26,15 @@ export const processRolePolicyDeleteToAPI = (policy_id: iRolePolicy['_id']) => {
     .then(response => response.data)
     .catch(err => Promise.reject(err))
 }
+
+export const saveUpdatedRolePolicyToAPI = (params: iRolePolicy) => {
+    return HTTP_API().post("/role-policy/update-role-policy", params)
+    .then(response => response.data)
+    .catch(err => Promise.reject(err))
+}
+
+export const getRolePolicyByIDFromAPI = (policy_id: iRolePolicy['_id']) => {
+    return HTTP_API().get("/role-policy/get-role-policy-by-id", { params: { policy_id } })
+    .then(response => response.data)
+    .catch(err => Promise.reject(err))
+}
