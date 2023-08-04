@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "../../../styles/pages/public/auth/Login.scss"
-import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonInput, IonButton, IonRouterLink, IonItem, IonIcon } from '@ionic/react'
+import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonInput, IonButton, IonRouterLink, IonItem, IonIcon, useIonToast } from '@ionic/react'
 import Logo from '../../../assets/images/logo-full.png'
 
 import gmailIcon from '../../../assets/images/google.png'
@@ -21,6 +21,8 @@ const Login: React.FC = () => {
     const [password, setPassword] = useState('')
     const [authToken, setAuthToken] = useLocalStorage<string | AxiosResponse>('authToken', '')
 
+    const [presentToast] = useIonToast();
+
     const loaded_bg = useProgressiveImage(loginBg);
     
     const history = useHistory();
@@ -37,7 +39,7 @@ const Login: React.FC = () => {
                 }
             }
         } catch (error: any) {
-            alert(error.response.data.error)
+            presentToast(error)
         }
     }
 
@@ -96,7 +98,7 @@ const Login: React.FC = () => {
                                                         labelPlacement="floating" 
                                                         placeholder='Enter your Email' 
                                                         value={email}
-                                                        onIonChange={(val) => setEmail(val.detail.value!)}
+                                                        onIonInput={(val) => setEmail(val.detail.value!)}
                                                     />
                                                 </IonItem>
                                                 
@@ -110,7 +112,7 @@ const Login: React.FC = () => {
                                                         placeholder='Enter your Password'
                                                         value={password}
                                                         required
-                                                        onIonChange={(val) => setPassword(val.detail.value!)}
+                                                        onIonInput={(val) => setPassword(val.detail.value!)}
                                                     />
                                                 </IonItem>
                                                 <IonButton 

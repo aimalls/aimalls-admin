@@ -46,10 +46,11 @@ export const RolePolicySelect: FC<iProps> = ({ rolePolicies, selectedRolePolicie
     const checkboxChange = (ev: CheckboxCustomEvent) => {
         const { checked, value } = ev.detail;
     
+
         if (checked) {
             onSelectionChange([...selectedRolePolicies, value]);
         } else {
-            onSelectionChange(selectedRolePolicies.filter((item) => item !== value));
+            onSelectionChange(selectedRolePolicies.filter((item) => item._id !== value._id));
         }
     };
 

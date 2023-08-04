@@ -1,13 +1,43 @@
 import { FC } from "react";
-import { IonButton, IonCol, IonContent, IonGrid, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonPage, IonRow } from "@ionic/react";
+import { IonButton, IonCol, IonContent, IonGrid, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonPage, IonRow, useIonAlert, useIonLoading, useIonToast } from "@ionic/react";
 import { useQuery } from "@tanstack/react-query";
-import { getAllRolesFromAPI, iRole } from "../../../../requests/role.request";
+import { deleteRoleToAPI, getAllRolesFromAPI, iRole } from "../../../../requests/role.request";
 export interface iProps {}
 export const Roles: FC<iProps> = (props): JSX.Element => {
 
     const rolesQuery = useQuery(["roles-query"], () => getAllRolesFromAPI())
 
     const roles: iRole[] = rolesQuery.data;
+
+    const [presentAlert] = useIonAlert();
+    const [presentToast] = useIonToast();
+    const [present, dismiss] = useIonLoading();
+
+    const deleteRole = async (_id: iRole['_id']) => {
+        const role = roles.find((value) => value._id == _id);
+        presentAlert(`Are you sure you want to delete ${role?.name}`, [
+            {
+                text: "Cancel",
+                role: "cancel"
+            },
+            {
+                text: "Yes",
+                handler: async () => {
+                    try {
+                        await present();
+                        const result = await deleteRoleToAPI(_id);
+                        presentToast(result.message);
+                        rolesQuery.refetch()
+                    } catch (err: any) {
+                        presentAlert(err)
+                    } finally {
+                        await dismiss();
+                    }
+                }
+            }
+        ])
+        
+    }
 
     return (
         <IonPage>
@@ -31,8 +61,8 @@ export const Roles: FC<iProps> = (props): JSX.Element => {
                                                 
                                             </IonItem>
                                             <IonItemOptions slot="end">
-                                                <IonItemOption color={"danger"}>Delete</IonItemOption>
-                                                <IonItemOption>Update</IonItemOption>
+                                                <IonItemOption color={"danger"} onClick={() => deleteRole(value._id)}>Delete</IonItemOption>
+                                                <IonItemOption routerLink={`/dashboard/roles/${value._id}/update`}>Update</IonItemOption>
                                             </IonItemOptions>
                                         </IonItemSliding>
                                     )) }

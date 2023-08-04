@@ -21,3 +21,21 @@ export const getAllRolesFromAPI = () => {
         .then(response => response.data)
         .catch(err => Promise.reject(err))
 }
+
+export const deleteRoleToAPI = (_id: iRole['_id']) => {
+    return HTTP_API().post("/role/delete-role", {roleId: _id})
+        .then(response => response.data)
+        .catch(err => Promise.reject(err))
+}
+
+export const getRoleByIDFromAPI = (_id: iRole['_id']) => {
+    return HTTP_API().get("/role/get-role-by-id", { params: {roleId: _id} })
+        .then(response => response.data)
+        .catch(err => Promise.reject(err))
+}
+
+export const saveUpdatedRoleToAPI = (params: iRole) => {
+    return HTTP_API().post("/role/save-updated-role", params)
+        .then(response => response.data)
+        .catch(err => Promise.reject(err))
+}

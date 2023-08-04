@@ -1,18 +1,56 @@
-import { FC } from "react";
-import { IonButton, IonCol, IonContent, IonGrid, IonInput, IonItem, IonLabel, IonList, IonPage, IonRow, IonToggle } from "@ionic/react";
+import { FC, useEffect, useRef, useState } from "react";
+import { CheckboxCustomEvent, IonButton, IonCol, IonContent, IonGrid, IonInput, IonItem, IonLabel, IonList, IonPage, IonRow, IonToggle, ToggleCustomEvent, useIonAlert, useIonLoading } from "@ionic/react";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { getUserByIDFromAPI, iUser } from "../../../../requests/user.request";
+import { deactivateUserToAPI, getUserByIDFromAPI, iUser } from "../../../../requests/user.request";
+import UserPasswordResetDialog from "./components/UserPasswordResetDialog";
 export interface iProps {}
 
 export const UserView: FC<iProps> = (props): JSX.Element => {
 
+
+    const [present, dismiss] = useIonLoading();
+    const [presentAlert] = useIonAlert();
+
     const params: {id: string} = useParams();
+
+    const [userPasswordResetDialog, setUserPasswordResetDialog] = useState(false)
+
     
     const userQuery = useQuery(["user-query"], () => getUserByIDFromAPI(params.id))
 
     const user: iUser = userQuery.data;
 
+
+
+    const handleOnUserDeactivate = async (ev: ToggleCustomEvent) => {
+
+        const { checked } = ev.detail
+        
+
+        presentAlert("Are you sure you want to deactivate this user?", [
+            {
+                text: "Cancel",
+                role: "cancel",
+            },
+            {
+                text: "Yes",
+                handler: async () => {
+                    try {
+                        await present();
+                        const result = await deactivateUserToAPI({id: params.id, deactivate: checked})
+                        await presentAlert(result.message);
+                        userQuery.refetch()
+                    } catch (err: any) {
+                        await presentAlert(err)
+                    } finally {
+                        await dismiss();
+                    }
+                },
+               
+            }
+        ])
+    }
 
     return (
         <IonPage>
@@ -41,12 +79,14 @@ export const UserView: FC<iProps> = (props): JSX.Element => {
                                             <IonLabel slot="end">{ user.updatedAt }</IonLabel>
                                         </IonItem>
                                         <IonItem button>
-                                            <IonLabel>Deactivate</IonLabel>
-                                            <IonToggle slot="end"></IonToggle>
+                                            <IonToggle
+                                                labelPlacement="start"
+                                                checked={ user.deactivated } 
+                                                onIonChange={handleOnUserDeactivate}>{ user.deactivated ? "Activate" : "Deactivate" }</IonToggle>
                                         </IonItem>
                                         <IonItem button>
                                             <IonLabel>Password</IonLabel>
-                                            <IonButton size="default" slot="end">Reset Password</IonButton>
+                                            <IonButton size="default" slot="end" onClick={() => setUserPasswordResetDialog(true)}>Reset Password</IonButton>
                                         </IonItem>
                                     </IonList>
                                 </IonCol>
@@ -60,6 +100,9 @@ export const UserView: FC<iProps> = (props): JSX.Element => {
                         ) }
                 </IonGrid>
             </IonContent>
+            { user ? (
+            <UserPasswordResetDialog isOpen={userPasswordResetDialog} userId={ user._id } onDismiss={() => setUserPasswordResetDialog(false)} />
+            ) : null}
         </IonPage>
     )
 };
