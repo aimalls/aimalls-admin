@@ -26,7 +26,7 @@ export const Roles: FC<iProps> = (props): JSX.Element => {
                     try {
                         await present();
                         const result = await deleteRoleToAPI(_id);
-                        presentToast(result.message);
+                        presentToast(result.message, 3000);
                         rolesQuery.refetch()
                     } catch (err: any) {
                         presentAlert(err)

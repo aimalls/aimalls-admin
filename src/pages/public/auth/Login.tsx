@@ -39,7 +39,7 @@ const Login: React.FC = () => {
                 }
             }
         } catch (error: any) {
-            presentToast(error)
+            presentToast(error, 3000)
         }
     }
 

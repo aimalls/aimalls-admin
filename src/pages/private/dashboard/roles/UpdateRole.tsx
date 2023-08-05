@@ -30,7 +30,7 @@ export const UpdateRole: FC<iProps> = (props): JSX.Element => {
             setRoleDescription(role.description)
             
             setSelectedRolePolicies((current) => {
-                let curr = [...current, ...role.rolePolicies] as iRolePolicy[];
+                let curr = [...role.rolePolicies] as iRolePolicy[];
                 
                 return curr;
             })
@@ -55,11 +55,14 @@ export const UpdateRole: FC<iProps> = (props): JSX.Element => {
             rolePolicies: mappedPolicies
         }
 
+        console.log(params)
+        // return
+
         try {
             await present();
             const result = await saveUpdatedRoleToAPI(params);
-            await presentToast(result.message);
-            navigation.push("/dashboard/roles");
+            await presentToast(result.message, 3000);
+            // navigation.push("/dashboard/roles");
             roleQuery.refetch()
         } catch (err: any) {
             presentAlert(err)

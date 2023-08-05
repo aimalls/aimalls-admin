@@ -1,9 +1,11 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { CheckboxCustomEvent, IonButton, IonCol, IonContent, IonGrid, IonInput, IonItem, IonLabel, IonList, IonPage, IonRow, IonToggle, ToggleCustomEvent, useIonAlert, useIonLoading } from "@ionic/react";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { deactivateUserToAPI, getUserByIDFromAPI, iUser } from "../../../../requests/user.request";
 import UserPasswordResetDialog from "./components/UserPasswordResetDialog";
+import UserRoleChangeDialog from "./components/UserRoleChangeDialog";
+import { iRole } from "../../../../requests/role.request";
 export interface iProps {}
 
 export const UserView: FC<iProps> = (props): JSX.Element => {
@@ -15,11 +17,21 @@ export const UserView: FC<iProps> = (props): JSX.Element => {
     const params: {id: string} = useParams();
 
     const [userPasswordResetDialog, setUserPasswordResetDialog] = useState(false)
+    const [userRoleChangeDialog, setUserRoleChangeDialog] = useState(false)
 
     
     const userQuery = useQuery(["user-query"], () => getUserByIDFromAPI(params.id))
 
     const user: iUser = userQuery.data;
+
+    const roles = useMemo(() => {
+        if (user && user.roles) {
+            const userRoles = user.roles as iRole[];
+            return userRoles.map((role) => {
+                return role.name
+            })
+        }
+    }, [user])
 
 
 
@@ -50,6 +62,11 @@ export const UserView: FC<iProps> = (props): JSX.Element => {
                
             }
         ])
+    }
+
+    const handleRoleChangeSuccess = () => {
+        userQuery.refetch();
+        setUserRoleChangeDialog(false)
     }
 
     return (
@@ -88,6 +105,10 @@ export const UserView: FC<iProps> = (props): JSX.Element => {
                                             <IonLabel>Password</IonLabel>
                                             <IonButton size="default" slot="end" onClick={() => setUserPasswordResetDialog(true)}>Reset Password</IonButton>
                                         </IonItem>
+                                        <IonItem>
+                                            <IonLabel>Roles: { roles ? JSON.stringify(roles) : null }</IonLabel>
+                                            <IonButton slot="end" size="default" onClick={() => setUserRoleChangeDialog(true)}>Change</IonButton>
+                                        </IonItem>
                                     </IonList>
                                 </IonCol>
                             </IonRow>
@@ -101,7 +122,10 @@ export const UserView: FC<iProps> = (props): JSX.Element => {
                 </IonGrid>
             </IonContent>
             { user ? (
+            <>
+            <UserRoleChangeDialog isOpen={userRoleChangeDialog} userId={ user._id } onDismiss={() => setUserRoleChangeDialog(false)} onSuccess={handleRoleChangeSuccess}  />
             <UserPasswordResetDialog isOpen={userPasswordResetDialog} userId={ user._id } onDismiss={() => setUserPasswordResetDialog(false)} />
+            </>
             ) : null}
         </IonPage>
     )

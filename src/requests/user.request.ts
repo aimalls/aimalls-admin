@@ -1,4 +1,5 @@
 import { HTTP_API } from "../helpers/http"
+import { iRole } from "./role.request";
 
 
 
@@ -11,7 +12,8 @@ export interface iUser {
     createdAt: string;
     updatedAt: string;
     referrer?: string;
-    deactivated?: boolean
+    deactivated?: boolean,
+    roles: iRole[] | iRole['_id'][],
 }
 
 export const getAllUsersFromAPI = () => {
@@ -34,6 +36,12 @@ export const deactivateUserToAPI = (params: any) => {
 
 export const saveResetPasswordToAPI = (params: {userId: iUser['_id'], newPassword: string}) => {
     return HTTP_API().post("/user/reset-password", params)
+        .then(response => response.data)
+        .catch(err => Promise.reject(err))
+}
+
+export const saveUpdatedUserRole = (params: { userId: iUser['_id'], roles: iUser['roles'] }) => {
+    return HTTP_API().post("/user/save-updated-user-roles", params)
         .then(response => response.data)
         .catch(err => Promise.reject(err))
 }

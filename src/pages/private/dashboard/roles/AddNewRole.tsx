@@ -39,7 +39,7 @@ export const AddNewRole: FC<iProps> = (props): JSX.Element => {
         try {
             await present();
             const result = await saveNewRoleToAPI(params);
-            await presentToast(result.message);
+            await presentToast(result.message, 3000);
             navigation.push("/dashboard/roles");
         } catch (err: any) {
             presentAlert(err)

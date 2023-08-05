@@ -37,10 +37,10 @@ export const UserPasswordResetDialog: FC<iProps> = ({ isOpen, userId, onDismiss 
         try {
             await present();
             const result = await saveResetPasswordToAPI({ userId, newPassword });
-            presentToast(result.message)
+            presentToast(result.message, 3000)
             onDismiss()
         } catch (err: any) {
-            presentToast(err)
+            presentToast(err, 3000)
         } finally {
             await dismiss();
         }
