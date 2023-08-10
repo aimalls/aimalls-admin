@@ -4,6 +4,7 @@ export interface iProductCategory {
     _id: string,
     name: string,
     parent: string,
+    specifications?: [{ specificationId: string, attributes: string[] }]
     createdBy: string
 }
 

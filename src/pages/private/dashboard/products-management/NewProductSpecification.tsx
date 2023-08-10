@@ -55,7 +55,7 @@ export const NewProductSpecification: FC<iProps> = (props): JSX.Element => {
             await present();
             const result = await saveNewProductSpecificationToAPI(newProductSpecificationForm)
             setNewProductSpecificationForm(newProductSpecificationFormInitialState)
-            await presetToast(result.data.message, 3000)
+            await presetToast(result.message, 3000)
         } catch (err: any) {
             await presetToast(err, 3000)
         } finally {

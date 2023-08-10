@@ -4,7 +4,8 @@ export interface iProductSpecification {
     _id?: string,
     name: string,
     fieldType: string,
-    fieldOptions?: any[]
+    fieldOptions?: any[],
+    attributes?: any[]
 }
 
 export const saveNewProductSpecificationToAPI = async (params: iProductSpecification) => {

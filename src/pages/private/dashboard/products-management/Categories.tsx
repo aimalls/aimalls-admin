@@ -96,6 +96,11 @@ export const Categories: FC<iProps> = (props): JSX.Element => {
         setSelectedProductCategoryForUpdate(category)
     }
 
+    const handleUpdateSuccess = () => {
+        setUpdateCategoryFormHidden(true)
+        setSelectedProductCategoryForUpdate(undefined)
+    }
+
     const deleteCategory = async (categoryId: String) => {
         try {
             await present();
@@ -144,8 +149,10 @@ export const Categories: FC<iProps> = (props): JSX.Element => {
                             <NewCategoryForm parent={currentSelectedCategory} onSuccess={() => handleNewCategoryFormSuccess()} />
                         </IonCol>
                         { !updateCategoryFormHidden ? (
-                        <IonCol size="12">
-                            <UpdateCategoryForm onDismiss={() => setUpdateCategoryFormHidden(true)} productCategory={selectedProductCategoryForUpdate!} onSuccess={() => handleNewCategoryFormSuccess()} />
+                        <IonCol size="12" className="form">
+                            { !updateCategoryFormHidden ? (
+                                <UpdateCategoryForm onDismiss={() => setUpdateCategoryFormHidden(true)} productCategory={selectedProductCategoryForUpdate!} onSuccess={() => handleUpdateSuccess()} />
+                            ): null }
                         </IonCol>
                         ): null }
                         <IonCol size="12">

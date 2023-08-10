@@ -5,14 +5,14 @@ import { iProductSpecification, getProductSpecificationByID, saveUpdatedProductS
 import { useQuery } from "@tanstack/react-query";
 import { options, remove, close } from "ionicons/icons";
 import useArray from "../../../../hooks/useArray";
+import { useProductSpecification } from "../../../../hooks/useProductSpecification";
 export interface iProps {}
 export const UpdateProductSpecification: FC<iProps> = (props): JSX.Element => {
 
     const params: { id: iProductSpecification['_id'] } = useParams();
 
-    const productSpecificationQuery = useQuery(["product-specification-query"], () => getProductSpecificationByID(params.id))
+    const { productSpecificationQuery, productSpecification } = useProductSpecification(params.id);
 
-    const productSpecification: iProductSpecification = productSpecificationQuery.data
 
     const updateProductSpecificationFormInitialState = {
         _id: "",

@@ -14,7 +14,7 @@ export const RolePolicySelect: FC<iProps> = ({ rolePolicies, selectedRolePolicie
 
     const isChecked = (value: iRolePolicy) => {
         return selectedRolePolicies.find((item) => item._id === value._id) !== undefined;
-      };
+    };
 
     const searchbarInput = (ev: any) => {
         filterList(ev.target.value);

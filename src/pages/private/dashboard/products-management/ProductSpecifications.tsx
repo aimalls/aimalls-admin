@@ -2,7 +2,8 @@ import { FC } from "react";
 import { IonButton, IonButtons, IonCol, IonContent, IonGrid, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonPage, IonRow, useIonAlert, useIonLoading, useIonToast } from "@ionic/react";
 import { useHistory } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { deleteProductSpecificationToAPI, getAllProductSpecificationsFromAPI, iProductSpecification } from "../../../../requests/product-specification.request";
+import { deleteProductSpecificationToAPI, iProductSpecification } from "../../../../requests/product-specification.request";
+import { useProductSpecification } from "../../../../hooks/useProductSpecification";
 export interface iProps {}
 export const ProductSpecifications: FC<iProps> = (props): JSX.Element => {
     const navigation = useHistory();
@@ -10,9 +11,9 @@ export const ProductSpecifications: FC<iProps> = (props): JSX.Element => {
     const [presentAlert] = useIonAlert();
     const [presentToast] = useIonToast();
 
-    const productSpecificationsQuery = useQuery(["product-specifications-query"], () => getAllProductSpecificationsFromAPI())
+    const { productSpecificationsQuery, productSpecifications } = useProductSpecification()
 
-    const productSpecifications: iProductSpecification[] = productSpecificationsQuery.data;
+    
     
 
     const handleProductSpecificationDelete = async (productSpecificationID: iProductSpecification['_id']) => {
