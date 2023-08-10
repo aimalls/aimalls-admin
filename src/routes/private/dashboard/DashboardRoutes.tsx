@@ -20,6 +20,9 @@ import RolePolicies from "../../../pages/private/dashboard/roles/RolePolicies";
 import AddNewRolePolicy from "../../../pages/private/dashboard/roles/AddNewRolePolicy";
 import UpdateRolePolicy from "../../../pages/private/dashboard/roles/UpdateRolePolicy";
 import UpdateRole from "../../../pages/private/dashboard/roles/UpdateRole";
+import ProductSpecifications from "../../../pages/private/dashboard/products-management/ProductSpecifications";
+import NewProductSpecification from "../../../pages/private/dashboard/products-management/NewProductSpecification";
+import UpdateProductSpecification from "../../../pages/private/dashboard/products-management/UpdateProductSpecification";
 
 export interface iProps {}
 export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
@@ -36,6 +39,15 @@ export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
             </Route>
             <Route exact path="/dashboard/products-management/categories">
                 <Categories />
+            </Route>
+            <Route exact path="/dashboard/products-management/specifications">
+                <ProductSpecifications />
+            </Route>
+            <Route exact path="/dashboard/products-management/specifications/new">
+                <NewProductSpecification />
+            </Route>
+            <Route exact path="/dashboard/products-management/specifications/:id/update">
+                <UpdateProductSpecification />
             </Route>
             <Route exact path="/dashboard/tasks/new">
                 <AddNewTask />

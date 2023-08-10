@@ -16,17 +16,30 @@ export const ProductsManagement: FC<iProps> = (props): JSX.Element => {
                             <span className="page-title">Products Management</span>
                         </IonCol>
                         <IonCol size="12" sizeMd="4">
-                        <IonCard routerLink="products-management/categories">
-                            <IonCardHeader>
-                                <IonCardTitle>Product Categories</IonCardTitle>
-                                {/* <IonCardSubtitle>Card Subtitle</IonCardSubtitle> */}
-                            </IonCardHeader>
+                            <IonCard routerLink="products-management/categories" style={{ height: '100%' }}>
+                                <IonCardHeader>
+                                    <IonCardTitle>Product Categories</IonCardTitle>
+                                    {/* <IonCardSubtitle>Card Subtitle</IonCardSubtitle> */}
+                                </IonCardHeader>
 
-                            <IonCardContent>A tool for managing product categories Like Women's Wear, Men's Wear and all the hierarchies of each product categories</IonCardContent>
+                                <IonCardContent>A tool for managing product categories Like Women's Wear, Men's Wear and all the hierarchies of each product categories</IonCardContent>
 
-                            {/* <IonButton fill="clear">Action 1</IonButton>
-                            <IonButton fill="clear">Action 2</IonButton> */}
-                        </IonCard>
+                                {/* <IonButton fill="clear">Action 1</IonButton>
+                                <IonButton fill="clear">Action 2</IonButton> */}
+                            </IonCard>
+                        </IonCol>
+                        <IonCol size="12" sizeMd="4">
+                            <IonCard routerLink="products-management/specifications" style={{ height: '100%' }}>
+                                <IonCardHeader>
+                                    <IonCardTitle>Product Specifications</IonCardTitle>
+                                    {/* <IonCardSubtitle>Card Subtitle</IonCardSubtitle> */}
+                                </IonCardHeader>
+
+                                <IonCardContent>A tool for managing product specifications</IonCardContent>
+
+                                {/* <IonButton fill="clear">Action 1</IonButton>
+                                <IonButton fill="clear">Action 2</IonButton> */}
+                            </IonCard>
                         </IonCol>
                     </IonRow>
                 </IonGrid>
