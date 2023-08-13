@@ -22,6 +22,8 @@ export const UpdateCategoryForm: FC<iProps> = ({ onSuccess, productCategory, onD
     const [presentToast] = useIonToast();
 
     
+
+    
     const { productSpecificationsQuery, productSpecifications } = useProductSpecification();
     const allProductCategoriesQuery = useQuery(["all-product-categories"], () => getAllProductCategoriesFromAPI())
 
@@ -67,24 +69,23 @@ export const UpdateCategoryForm: FC<iProps> = ({ onSuccess, productCategory, onD
                     return false
                 }
             })
-            handleSelectedProductSpecificationChange(mappedSpecifications)
+            
 
-            if (productCategory.specifications) {
-                productCategory.specifications.forEach(v => {
-                    setSelectedProductSpecifications(current => {
-                        return current.map((curr) => {
-                            if (curr._id == v.specificationId) {
-                                return {...curr, attributes: v.attributes}
-                            } else {
-                                return curr
-                            }
-                        })
-                    })
-                })
-            }
+            const mappedSpecifications2 = mappedSpecifications.map(specification => {
+                const sp = productCategory.specifications?.find(s => s.specificationId == specification._id)
+                if (sp) {
+                    specification.attributes = sp.attributes
+                    return specification
+                } else {
+                    return specification
+                }
+            })
+            handleSelectedProductSpecificationChange(mappedSpecifications2)
             
         }
     }, [productSpecifications])
+
+
 
    
 
@@ -107,6 +108,7 @@ export const UpdateCategoryForm: FC<iProps> = ({ onSuccess, productCategory, onD
                 productSpecifications: mappedProductSpecification,
                 parent: parent?._id
             }
+
             const result = await saveUpdatedProductCategoryToAPI(params);
             setCategoryName('')
             setParent(null)
@@ -179,6 +181,7 @@ export const UpdateCategoryForm: FC<iProps> = ({ onSuccess, productCategory, onD
                 onIonInput={(e) => setCategoryName(e.detail.value!)}
             />
             { !productSpecificationsQuery.isLoading ? (
+                <>
                 <IonSelect
                     multiple
                     label="Select Specification"
@@ -188,12 +191,12 @@ export const UpdateCategoryForm: FC<iProps> = ({ onSuccess, productCategory, onD
                     onIonChange={(e) => handleSelectedProductSpecificationChange(e.detail.value)}
                 >
                     { productSpecifications ? productSpecifications.map((productSpecification, index) => (
-                        <IonSelectOption key={`product-specification-${index}`} value={productSpecification}>
+                        <IonSelectOption  key={`product-specification-${index}`} value={productSpecification}>
                             { productSpecification.name }
                         </IonSelectOption>
                     )): null }
                 </IonSelect>
-                
+                </>
             ): "Loading Product Specifications" }
             <IonList>
                 { selectedProductSpecifications ? selectedProductSpecifications.map((selectedProductSpecification, index) => (

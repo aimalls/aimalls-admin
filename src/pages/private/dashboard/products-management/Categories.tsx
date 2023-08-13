@@ -99,6 +99,8 @@ export const Categories: FC<iProps> = (props): JSX.Element => {
     const handleUpdateSuccess = () => {
         setUpdateCategoryFormHidden(true)
         setSelectedProductCategoryForUpdate(undefined)
+        loadComponentRequirements()
+
     }
 
     const deleteCategory = async (categoryId: String) => {
