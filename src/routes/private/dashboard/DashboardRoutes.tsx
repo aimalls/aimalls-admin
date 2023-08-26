@@ -23,6 +23,7 @@ import UpdateRole from "../../../pages/private/dashboard/roles/UpdateRole";
 import ProductSpecifications from "../../../pages/private/dashboard/products-management/ProductSpecifications";
 import NewProductSpecification from "../../../pages/private/dashboard/products-management/NewProductSpecification";
 import UpdateProductSpecification from "../../../pages/private/dashboard/products-management/UpdateProductSpecification";
+import Whitelist from "../../../pages/private/dashboard/whitelist/Whitelist";
 
 export interface iProps {}
 export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
@@ -90,6 +91,10 @@ export const DashboardRoutes: FC<iProps> = (props): JSX.Element => {
 
             <Route path="/dashboard/tasks/task/:id">
                 <Task />
+            </Route>
+
+            <Route path="/dashboard/whitelists">
+                <Whitelist />
             </Route>
         </>
     )

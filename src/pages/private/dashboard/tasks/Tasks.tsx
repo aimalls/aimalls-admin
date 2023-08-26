@@ -59,32 +59,6 @@ export const Tasks: FC<iProps> = (props): JSX.Element => {
                                                                 ) }
                                                             </div>
                                                         </IonCol>
-                                                        <IonCol size="12" sizeMd="6">
-                                                            {/* { task.customFields?.map((field: any, index: any) => (
-                                                                field?.fieldType == 'text' ? (
-                                                                    <IonCol key={index} size="12" style={{ color: "#000"}}>
-                                                                        <IonInput fill="solid" {...field} type="text" placeholder={field.placeholder} labelPlacement="floating"  />
-                                                                    </IonCol>
-                                                                ) : field?.fieldType == 'textarea'  ?
-                                                                (
-                                                                    <IonCol key={index} size="12" style={{ color: "#000"}}>
-                                                                        <IonTextarea {...field}  fill={field.fill} placeholder={field.placeholder || ''} />
-                                                                    </IonCol>
-                                                                ) : field?.fieldType == 'select' ? (
-                                                                    <IonCol key={index} size="12">
-                                                                        <IonSelect {...field}  labelPlacement="floating">
-                                                                            {field.options.map((option: any, index: any) => (
-                                                                                <IonSelectOption key={`select-option-${index}`} value={option.value}>{option.label}</IonSelectOption>   
-                                                                            ))}
-                                                                        </IonSelect>
-                                                                    </IonCol>
-                                                                ) : field?.fieldType == 'file' ? (
-                                                                    <IonCol size="12" key={index}>
-                                                                        <input type={ field.type } accept="image/*" placeholder={field.placeholder} />
-                                                                    </IonCol>
-                                                                ) : null
-                                                            )) } */}
-                                                        </IonCol>
                                                     </IonRow>
                                                 </IonGrid>
                                             </IonItem>

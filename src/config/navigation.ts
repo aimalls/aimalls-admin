@@ -1,4 +1,4 @@
-import { cartOutline, cogOutline, homeOutline, list, peopleCircle, shieldCheckmark } from 'ionicons/icons'
+import { cartOutline, checkboxOutline, cogOutline, homeOutline, list, peopleCircle, shieldCheckmark } from 'ionicons/icons'
 export interface iNavigation {
     lines: "full" | "none" | "inset" | undefined,
     text: string,
@@ -41,6 +41,13 @@ export default [
         icon: shieldCheckmark,
         color: "#FFF",
         link: "/dashboard/roles"
+    },
+    {
+        lines: 'full',
+        text: 'Whitelist Applications',
+        icon: checkboxOutline,
+        color: "#FFF",
+        link: "/dashboard/whitelists"
     },
     {
         lines: 'full',
