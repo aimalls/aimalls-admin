@@ -9,10 +9,6 @@ export const NewProductSpecification: FC<iProps> = (props): JSX.Element => {
     const navigation = useHistory();
     const [present, dismiss] = useIonLoading();
     const [presetToast] = useIonToast();
-    // name: String,
-    // label: String,
-    // filedType: String,
-    // fieldOptions: [String],
 
 
     const newProductSpecificationFormInitialState = {
